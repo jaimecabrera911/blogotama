@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -43,6 +43,6 @@ public class TagEntity implements Serializable {
 
     @ManyToMany(mappedBy = "tags")
     @Builder.Default
-    private Set<PostEntity> posts = new LinkedHashSet<>();
+    private List<PostEntity> posts = new ArrayList<>();
 
 }

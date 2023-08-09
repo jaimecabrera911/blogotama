@@ -7,8 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.List;
 
 
 @Component
@@ -26,7 +25,7 @@ public class FindTagsUseCaseImpl implements FindTagsUseCase {
     }
 
     @Override
-    public Set<TagEntity> findByNames(Set<String> names) {
-        return names.stream().map(this::findByName).collect(Collectors.toSet());
+    public List<TagEntity> findByNames(List<String> names) {
+        return names.stream().map(this::findByName).toList();
     }
 }

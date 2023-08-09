@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.List;
 
 /**
  * DTO for {@link PostEntity}
@@ -24,7 +24,9 @@ public class PostResDto {
     private String content;
     private Timestamp creationDate;
     private String user;
-    private Set<String> tags;
-    private Set<CommentResDto> comments;
-    private Set<LikeResDto> likes;
+    private List<String> tags;
+    private List<CommentPostResDto> comments;
+    private long numLikes;
+    private long numDislikes;
+    private List<LikePostResPostDto> likes;
 }

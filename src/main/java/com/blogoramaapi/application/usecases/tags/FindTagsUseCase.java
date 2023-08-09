@@ -2,12 +2,12 @@ package com.blogoramaapi.application.usecases.tags;
 
 import com.blogoramaapi.domain.entities.TagEntity;
 
-import java.util.Set;
+import java.util.List;
 
 
 public interface FindTagsUseCase {
 
     TagEntity findByName(String name);
 
-    Set<TagEntity> findByNames(Set<String> names);
+    List<TagEntity> findByNames(List<String> names);
 }

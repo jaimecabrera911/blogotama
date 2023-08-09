@@ -1,6 +1,7 @@
 package com.blogoramaapi.application.dtos.req;
 
 import com.blogoramaapi.domain.entities.CommentEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,5 +19,6 @@ import lombok.Setter;
 public class CommentReqDto {
     private long postId;
     private String text;
+    @JsonIgnore
     private String username;
 }

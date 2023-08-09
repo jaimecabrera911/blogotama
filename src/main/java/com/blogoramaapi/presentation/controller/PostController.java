@@ -7,6 +7,7 @@ import com.blogoramaapi.application.usecases.posts.DeletePostsUseCase;
 import com.blogoramaapi.application.usecases.posts.FindPostsUseCase;
 import com.blogoramaapi.application.usecases.posts.UpdatePostUseCase;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping(("/posts"))
 @RequiredArgsConstructor
+@Slf4j
 public class PostController {
 
     private final CreatePostUseCase createPostUseCase;

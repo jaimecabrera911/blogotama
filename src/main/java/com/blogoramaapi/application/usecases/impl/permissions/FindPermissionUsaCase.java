@@ -1,4 +1,4 @@
-package com.blogoramaapi.application.usecases.permissions;
+package com.blogoramaapi.application.usecases.impl.permissions;
 
 import com.blogoramaapi.application.dtos.res.PermissionResDto;
 

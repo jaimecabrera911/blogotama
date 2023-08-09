@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=blogorama_db
-    username: postgres
-    password: jaca57688
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DB_NAME}?currentSchema=${DATABASE_SCHEMA_NAME}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
   jpa:
     properties:
       hibernate:

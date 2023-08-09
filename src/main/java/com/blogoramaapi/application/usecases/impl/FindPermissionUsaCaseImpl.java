@@ -2,7 +2,7 @@ package com.blogoramaapi.application.usecases.impl;
 
 import com.blogoramaapi.application.dtos.res.PermissionResDto;
 import com.blogoramaapi.application.mappers.PermissionMapper;
-import com.blogoramaapi.application.usecases.permissions.FindPermissionUsaCase;
+import com.blogoramaapi.application.usecases.impl.permissions.FindPermissionUsaCase;
 import com.blogoramaapi.domain.repositories.PermissionEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

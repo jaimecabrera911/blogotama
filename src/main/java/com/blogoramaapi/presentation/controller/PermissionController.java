@@ -1,7 +1,7 @@
 package com.blogoramaapi.presentation.controller;
 
 import com.blogoramaapi.application.dtos.res.PermissionResDto;
-import com.blogoramaapi.application.usecases.permissions.FindPermissionUsaCase;
+import com.blogoramaapi.application.usecases.impl.permissions.FindPermissionUsaCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

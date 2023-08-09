@@ -2,6 +2,7 @@ package com.blogoramaapi.application.mappers;
 
 import com.blogoramaapi.application.dtos.req.PostReqDto;
 import com.blogoramaapi.application.dtos.res.PostResDto;
+import com.blogoramaapi.domain.entities.LikeEntity;
 import com.blogoramaapi.domain.entities.PostEntity;
 import com.blogoramaapi.domain.entities.TagEntity;
 import org.mapstruct.AfterMapping;
@@ -12,14 +13,12 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
+import java.util.List;
 
 @Mapper(
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {UserMapper.class},
+        uses = {UserMapper.class, CommentMapper.class, LikeMapper.class},
         builder = @Builder(disableBuilder = true)
 )
 public interface PostMapper {
@@ -30,7 +29,11 @@ public interface PostMapper {
 
     @AfterMapping
     default void toResDtoAfterMapping(PostEntity postEntity, @MappingTarget PostResDto postResDto) {
-        Set<String> tags = postEntity.getTags().stream().map(TagEntity::getName).collect(toSet());
+        List<String> tags = postEntity.getTags().stream().map(TagEntity::getName).toList();
+        long numLikes = postEntity.getLikes().stream().filter(LikeEntity::isLike).count();
+        long numDislikes = postEntity.getLikes().stream().filter(likeEntity -> !likeEntity.isLike()).count();
+        postResDto.setNumLikes(numLikes);
+        postResDto.setNumDislikes(numDislikes);
         postResDto.setTags(tags);
     }
 

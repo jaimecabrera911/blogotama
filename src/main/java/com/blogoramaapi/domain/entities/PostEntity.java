@@ -8,7 +8,6 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,8 +26,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -57,7 +56,7 @@ public class PostEntity implements Serializable {
     private Timestamp creationDate;
 
     @JoinColumn(name = "author_id", referencedColumnName = "user_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private UserEntity user;
 
     @ManyToMany
@@ -65,14 +64,28 @@ public class PostEntity implements Serializable {
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     @Builder.Default
-    private Set<TagEntity> tags = new LinkedHashSet<>();
+    private List<TagEntity> tags=new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     @Builder.Default
-    private Set<CommentEntity> comments = new LinkedHashSet<>();
+    private List<CommentEntity> comments = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     @Builder.Default
-    private Set<LikeEntity> likes = new LinkedHashSet<>();
+    private List<LikeEntity> likes = new ArrayList<>();
+
+
+    public void addTag(TagEntity tag) {
+        if (tags == null) {
+            tags = new ArrayList<>();
+        }
+        tags.add(tag);
+    }
+
+    public void removeTag(TagEntity tag) {
+        if (tags != null) {
+            tags.remove(tag);
+        }
+    }
 
 }

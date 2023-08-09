@@ -1,26 +1,24 @@
 package com.blogoramaapi.application.dtos.res;
 
-import com.blogoramaapi.domain.entities.LikeEntity;
+import com.blogoramaapi.domain.entities.CommentEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
- * DTO for {@link LikeEntity}
+ * DTO for {@link CommentEntity}
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class LikeResDto {
-    private long postId;
-    private boolean isLike;
+public class CommentPostResDto {
+    private String text;
     private String username;
-    private LocalDate createdAt;
-
+    private Date publicationDate;
 }

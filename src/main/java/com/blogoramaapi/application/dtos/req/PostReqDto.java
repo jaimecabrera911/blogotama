@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * DTO for {@link PostEntity}
@@ -24,5 +24,5 @@ public class PostReqDto implements Serializable {
     private String content;
     @JsonIgnore
     private String username;
-    private Set<String> tags;
+    private List<String> tags;
 }

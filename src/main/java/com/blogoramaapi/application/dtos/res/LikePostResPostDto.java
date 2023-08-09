@@ -17,10 +17,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class LikeResDto {
-    private long postId;
-    private boolean isLike;
+public class LikePostResPostDto {
+    private boolean like;
     private String username;
     private LocalDate createdAt;
-
 }

@@ -4,12 +4,9 @@
  */
 package com.blogoramaapi.domain.entities;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,6 +18,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * @author JaimeCabreraDev
@@ -44,11 +45,15 @@ public class LikeEntity implements Serializable {
     @Column(nullable = false)
     private boolean isLike;
 
+    @Column(updatable = false)
+    @CreationTimestamp
+    private Timestamp createdAt;
+
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private PostEntity post;
 
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private UserEntity user;
 }

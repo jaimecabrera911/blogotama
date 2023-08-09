@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.List;
 
 /**
  * DTO for {@link UserEntity}
@@ -24,5 +24,5 @@ public class UserResDto {
     private String email;
     private Timestamp registrationDate;
     private boolean isEnabled;
-    private Set<PermissionResDto> permissions;
+    private List<PermissionResDto> permissions;
 }

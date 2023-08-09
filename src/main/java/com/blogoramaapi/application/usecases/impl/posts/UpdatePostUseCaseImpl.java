@@ -8,12 +8,14 @@ import com.blogoramaapi.domain.entities.PostEntity;
 import com.blogoramaapi.domain.entities.TagEntity;
 import com.blogoramaapi.domain.repositories.PostEntityRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class UpdatePostUseCaseImpl implements UpdatePostUseCase {
 
     private final FindPostsUseCase findPostsUseCase;
@@ -28,10 +30,16 @@ public class UpdatePostUseCaseImpl implements UpdatePostUseCase {
         if (!post.getUser().getUsername().equalsIgnoreCase(postReqDto.getUsername())) {
             throw new IllegalArgumentException("Error: You cannot update this post because you are not its owner.");
         }
-        Set<TagEntity> tags = findTagsUseCase.findByNames(postReqDto.getTags());
-        post.setTitle(postReqDto.getTitle());
-        post.setContent(postReqDto.getContent());
-        post.setTags(tags);
-        postEntityRepository.save(post);
+        try {
+            postEntityRepository.updateTitleAndContentById(postReqDto.getTitle(), postReqDto.getContent(), id);
+            List<TagEntity> tags = findTagsUseCase.findByNames(postReqDto.getTags());
+            post.getTags().clear();
+            //tags.forEach(post::removeTag);
+            tags.forEach(post::addTag);
+            postEntityRepository.save(post);
+        } catch (RuntimeException exception) {
+            log.error("error", exception);
+            throw exception;
+        }
     }
 }

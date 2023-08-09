@@ -23,7 +23,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -64,11 +65,11 @@ public class UserEntity implements Serializable, UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id"))
     @Builder.Default
-    private Set<PermissionEntity> permissions = new LinkedHashSet<>();
+    private List<PermissionEntity> permissions = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<SimpleGrantedAuthority> authorities = new LinkedHashSet<>();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission.getName())));
         return authorities;
     }

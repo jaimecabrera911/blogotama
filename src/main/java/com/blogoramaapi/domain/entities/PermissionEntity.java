@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,6 +41,6 @@ public class PermissionEntity implements Serializable {
 
     @ManyToMany(mappedBy = "permissions")
     @Builder.Default
-    private Set<UserEntity> users = new LinkedHashSet<>();
+    private List<UserEntity> users = new ArrayList<>();
 
 }
