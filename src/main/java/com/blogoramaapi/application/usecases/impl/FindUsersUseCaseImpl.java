@@ -1,8 +1,9 @@
-package com.blogoramaapi.application.usecases;
+package com.blogoramaapi.application.usecases.impl;
 
 import com.blogoramaapi.application.dtos.res.UserResDto;
 import com.blogoramaapi.application.mappers.UserMapper;
-import com.blogoramaapi.application.usecases.impl.FindUserUseCase;
+import com.blogoramaapi.application.usecases.users.FindUsersUseCase;
+import com.blogoramaapi.domain.entities.UserEntity;
 import com.blogoramaapi.domain.repositories.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class FindUserUseCaseImpl implements FindUserUseCase {
+public class FindUsersUseCaseImpl implements FindUsersUseCase {
 
     private final UserEntityRepository userEntityRepository;
     private final UserMapper userMapper;
@@ -25,13 +26,9 @@ public class FindUserUseCaseImpl implements FindUserUseCase {
     }
 
     @Override
-    public UserResDto findByUsername(String username) {
-        return userMapper.toResDto(userEntityRepository.findByUsername(username).orElseThrow());
+    public UserEntity findUserEntityByUsername(String username) {
+        return userEntityRepository.findByUsername(username).orElseThrow(
+                () -> new RuntimeException("User not found by username: " + username)
+        );
     }
-
-    @Override
-    public UserResDto findByEmail(String email) {
-        return userMapper.toResDto(userEntityRepository.findByEmail(email).orElseThrow());
-    }
-
 }

@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.blogoramaapi.application.dtos.res.UserResDto;
-import com.blogoramaapi.application.usecases.impl.FindUserUseCase;
+import com.blogoramaapi.application.usecases.users.FindUsersUseCase;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class JwtServiceImpl implements JwtService {
     @Value("${app.jwt.secret}")
     private String jwtSigningKey;
-    private final FindUserUseCase findUserUseCase;
+    private final FindUsersUseCase findUsersUseCase;
 
     private final Instant expirationTime = Instant.now().plus(30, ChronoUnit.MINUTES);
 
@@ -37,7 +37,7 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public String generateToken(UserDetails userDetails) {
         String username = userDetails.getUsername();
-        UserResDto userResDto = findUserUseCase.findByUsernameOrEmail(username);
+        UserResDto userResDto = findUsersUseCase.findByUsernameOrEmail(username);
         return JWT.create()
                 .withIssuer("blogorama-api")
                 .withSubject(username)

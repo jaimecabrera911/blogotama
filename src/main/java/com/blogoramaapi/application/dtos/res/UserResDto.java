@@ -2,10 +2,10 @@ package com.blogoramaapi.application.dtos.res;
 
 import com.blogoramaapi.domain.entities.UserEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Accessors(chain = true)
+@Builder
 public class UserResDto {
     private String name;
     private String username;

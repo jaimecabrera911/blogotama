@@ -1,7 +1,7 @@
 package com.blogoramaapi.presentation.controller;
 
 import com.blogoramaapi.application.dtos.res.UserResDto;
-import com.blogoramaapi.application.usecases.impl.FindUserUseCase;
+import com.blogoramaapi.application.usecases.users.FindUsersUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +16,16 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final FindUserUseCase findUserUseCase;
+    private final FindUsersUseCase findUsersUseCase;
 
     @GetMapping
     public UserResDto getUser(WebRequest webRequest) {
         String name = Objects.requireNonNull(webRequest.getUserPrincipal()).getName();
-        return findUserUseCase.findByUsernameOrEmail(name);
+        return findUsersUseCase.findByUsernameOrEmail(name);
     }
 
     @GetMapping("/{username}")
     public UserResDto findUserByUsernameOrEmail(@PathVariable String username) {
-        return findUserUseCase.findByUsernameOrEmail(username);
+        return findUsersUseCase.findByUsernameOrEmail(username);
     }
 }

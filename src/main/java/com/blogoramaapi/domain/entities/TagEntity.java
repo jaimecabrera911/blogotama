@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.blogoramaapi.domain.entities;
 
 import jakarta.persistence.Basic;
@@ -20,27 +24,25 @@ import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "permissions")
-public class PermissionEntity implements Serializable {
+@Table(name = "tags")
+public class TagEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "permission_id")
+    @Column(name = "tag_id")
     private Long id;
 
     @Basic(optional = false)
+    @Column(name = "name")
     private String name;
 
-    @Basic(optional = false)
-    private String description;
-
-    @ManyToMany(mappedBy = "permissions")
+    @ManyToMany(mappedBy = "tags")
     @Builder.Default
-    private Set<UserEntity> users = new LinkedHashSet<>();
+    private Set<PostEntity> posts = new LinkedHashSet<>();
 
 }
